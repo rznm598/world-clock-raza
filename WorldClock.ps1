@@ -97,7 +97,7 @@ $hdr.Add_MouseUp({ if($script:hd){ $script:hd=$null
 $gc.Add_Click({ Start-Process 'https://calendar.google.com'; $pop.Hide() })
 LayoutPop
 $script:closedAt=[DateTime]::MinValue
-$pop.Add_Deactivate({ if($pop.Visible){ $pop.Hide(); $script:closedAt=Get-Date } })
+$pop.Add_Deactivate({ if($pop.Visible -and -not $env:WC_TEST){ $pop.Hide(); $script:closedAt=Get-Date } })
 
 function TrayRects {
   $tray=[W]::FindWindow('Shell_TrayWnd',$null)
@@ -178,5 +178,6 @@ $bar.Add_Shown({ Update; Attach
 })
 $bar.Add_FormClosed({ [Windows.Forms.Application]::Exit() })
 [Windows.Forms.Application]::Run($bar)
+
 
 
