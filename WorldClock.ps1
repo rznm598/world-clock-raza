@@ -51,6 +51,7 @@ $bar.Controls.Add($lbl)
 # ---------- dropdown ----------
 $rowH=48; $popW=250
 $pop=New-Object Windows.Forms.Form
+$pop.AutoScaleMode='None'
 $pop.FormBorderStyle='None'; $pop.ShowInTaskbar=$false; $pop.StartPosition='Manual'; $pop.TopMost=$true
 $pop.BackColor=[Drawing.Color]::FromArgb(60,64,72)
 $hdrH=38; $calH=164; $gcH=34
@@ -81,7 +82,7 @@ function LayoutPop {
     $gc.Location=New-Object Drawing.Point(1,$y); $gc.Visible=$true; $y+=$gcH } else { $cal.Visible=$false; $gc.Visible=$false }
   for($i=0;$i -lt $zones.Count;$i++){
     $rows[$i].Name.Top=$y; $rows[$i].Time.Top=$y; $y+=$rowH }
-  $pop.Height=$y+1
+  $pop.Size=New-Object Drawing.Size($popW,($y+1))
   if($bottom -gt 0){ $pop.Top=$bottom-$pop.Height }
 }
 $posFile=Join-Path $env:APPDATA 'WorldClockPopX.txt'
@@ -178,6 +179,8 @@ $bar.Add_Shown({ Update; Attach
 })
 $bar.Add_FormClosed({ [Windows.Forms.Application]::Exit() })
 [Windows.Forms.Application]::Run($bar)
+
+
 
 
 
