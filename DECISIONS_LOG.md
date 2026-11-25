@@ -86,3 +86,14 @@
   - Option A: Free 2D dragging. Rejected because it conflicts with growing upward when the calendar opens.
   - Chosen: Horizontal offset saved in `%APPDATA%\WorldClockPopX.txt`; default 24px from the right edge.
 **Revisit Trigger:** Taskbar moved to another edge.
+
+### DEC-007 | 2026-11-25
+**Decision:** The taskbar label shows the time and "Wed 25" (day + date, no month) at full 9pt.
+**Context:** "Wed 25 Nov" wrapped in the 64px clock slot (BUG-006); shrinking the font made it unreadable.
+**Options Considered:**
+  - Option A: Widen over the notification bell for a two-column layout. Rejected by Raza; it would cover the bell.
+  - Option B: Widen over the tray icons. Rejected because it hides wifi/volume icons.
+  - Chosen: Stay in the stock clock slot and drop the month from the taskbar label (the dropdown still shows full dates).
+**Reasoning:** Readable size, nothing covered.
+**Impact:** Month isn't visible on the taskbar; it's one click away in the dropdown.
+**Revisit Trigger:** Raza wants the month back on the taskbar.

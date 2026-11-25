@@ -153,7 +153,7 @@ function FitFont($l1,$l2){
 }
 function Update {
   $h=ZoneTime $homeZone
-  $l1=$h.ToString('h:mm tt'); $l2=$h.ToString('ddd d MMM')
+  $l1=$h.ToString('h:mm tt'); $l2=$h.ToString('ddd d')   # month dropped so it fits the 64px slot at full size
   if($lbl.ClientSize.Width -gt 10){ $f=FitFont $l1 $l2; if($lbl.Font -ne $f){ $lbl.Font=$f } }
   $lbl.Text=$l1+"`r`n"+$l2
   if($pop.Visible){ FillRows }

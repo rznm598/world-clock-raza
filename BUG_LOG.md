@@ -71,7 +71,7 @@
 **Component:** `Update()` → taskbar label text
 **Symptom:** The top of the time was cut off in the taskbar on some days.
 **Root Cause:** On two-digit days the date ("Wed 25 Nov") is wider than the stock clock slot (~64px) at 9pt, so it wrapped onto a third line and the centred text overflowed the 40px taskbar. Single-digit days ("Fri 6 Nov") fit, so it only showed up later in the month.
-**Fix Applied:** `FitFont` measures both lines with `TextRenderer.MeasureText` and picks the largest Segoe UI size from 9pt down to 6.5pt that fits the label width and height (fonts cached).
+**Fix Applied:** First tried shrinking the font to fit (`FitFont`, 9pt down to 6.5pt); Raza found it too small to read. Final fix: the second line is now `ddd d` ("Wed 25", no month), which fits at the full 9pt. `FitFont` stays as a safety net and normally picks 9pt. See DEC-007.
 **Prevention:** Test text layout with the widest real values (two-digit day, "Wed", 12:xx PM), not just today's date.
 **Pattern Flag:** Yes (sizing, see PATTERNS)
 
