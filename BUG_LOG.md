@@ -67,9 +67,17 @@
 **Prevention:** Set the form size in the single layout function, never only at creation. Measure the real window rect (`GetWindowRect`) when checking layout.
 **Pattern Flag:** Yes (sizing, see PATTERNS)
 
+### BUG-006 | 2026-11-25 | Status: Resolved
+**Component:** `Update()` → taskbar label text
+**Symptom:** The top of the time was cut off in the taskbar on some days.
+**Root Cause:** On two-digit days the date ("Wed 25 Nov") is wider than the stock clock slot (~64px) at 9pt, so it wrapped onto a third line and the centred text overflowed the 40px taskbar. Single-digit days ("Fri 6 Nov") fit, so it only showed up later in the month.
+**Fix Applied:** `FitFont` measures both lines with `TextRenderer.MeasureText` and picks the largest Segoe UI size from 9pt down to 6.5pt that fits the label width and height (fonts cached).
+**Prevention:** Test text layout with the widest real values (two-digit day, "Wed", 12:xx PM), not just today's date.
+**Pattern Flag:** Yes (sizing, see PATTERNS)
+
 ---
 
 ## RECURRING PATTERNS
 
-### PATTERN DETECTED: sizes assumed instead of measured (BUG-003, BUG-005)
+### PATTERN DETECTED: sizes assumed instead of measured (BUG-003, BUG-005, BUG-006)
 Both layout bugs came from trusting a size the code assumed (a control width before its handle existed, a form width set once and later dropped) instead of the size Windows actually used. When changing layout, measure the real window rect and check it against `$popW`, and keep all sizing in `LayoutPop`.

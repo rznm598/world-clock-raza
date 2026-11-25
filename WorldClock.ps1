@@ -137,9 +137,25 @@ function Attach {
   }
 }
 
+$script:fontCache=@{}
+function FitFont($l1,$l2){
+  # largest font (9pt down to 6.5pt) where both lines fit on one line each, so the date never wraps
+  $avail=$lbl.ClientSize.Width-4
+  $availH=$lbl.ClientSize.Height
+  foreach($sz in 9,8.5,8,7.5,7,6.5){
+    if(-not $script:fontCache.ContainsKey($sz)){ $script:fontCache[$sz]=New-Object Drawing.Font('Segoe UI',$sz) }
+    $f=$script:fontCache[$sz]
+    $w1=[Windows.Forms.TextRenderer]::MeasureText($l1,$f).Width
+    $s2=[Windows.Forms.TextRenderer]::MeasureText($l2,$f)
+    if([Math]::Max($w1,$s2.Width) -le $avail -and ($s2.Height*2) -le $availH){ return $f }
+  }
+  return $script:fontCache[6.5]
+}
 function Update {
   $h=ZoneTime $homeZone
-  $lbl.Text=$h.ToString('h:mm tt')+"`r`n"+$h.ToString('ddd d MMM')
+  $l1=$h.ToString('h:mm tt'); $l2=$h.ToString('ddd d MMM')
+  if($lbl.ClientSize.Width -gt 10){ $f=FitFont $l1 $l2; if($lbl.Font -ne $f){ $lbl.Font=$f } }
+  $lbl.Text=$l1+"`r`n"+$l2
   if($pop.Visible){ FillRows }
 }
 function FillRows {

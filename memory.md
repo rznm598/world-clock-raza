@@ -118,6 +118,7 @@ Full detail lives in BUG_LOG.md.
 | BUG-003 | 2026-11-06 | calendar centring | Force `$cal.Handle` before reading `$cal.Width` |
 | BUG-004 | 2026-11-06 | MonthCalendar "Today" row | `ShowToday = $false` |
 | BUG-005 | 2026-11-06 | dropdown width | Set `$pop.Size` to `$popW` in `LayoutPop` (form had fallen back to 300px) |
+| BUG-006 | 2026-11-25 | taskbar label | Shrink font to fit so the date never wraps (two-digit days overflowed) |
 
 ---
 
