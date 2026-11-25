@@ -1,8 +1,8 @@
 # World Clock Raza
 
-A small Windows taskbar clock that replaces the stock clock with Islamabad time and date. Click it to open a dropdown with Los Angeles, New York, London, Islamabad and Sydney, plus a month calendar and a link to Google Calendar.
+A small Windows taskbar clock that replaces the stock clock with Islamabad time and the day and date (for example "8:55 PM / Wed 25"). Click it to open a dropdown with Los Angeles, New York, London, Islamabad and Sydney, plus a month calendar and a link to Google Calendar.
 
-No install and no dependencies: just PowerShell and the Windows window toolkit that ship with Windows 10/11.
+No install and no dependencies: just PowerShell and the Windows window toolkit that ship with Windows. Built and tested on Windows 10 with the taskbar at the bottom; Windows 11 is untested.
 
 ## Run it
 
@@ -26,3 +26,4 @@ Edit the `$zones` list at the top of `WorldClock.ps1` (name + Windows time zone 
 - `WorldClock.ps1` – the taskbar clock
 - `WorldClock.vbs` – hidden launcher
 - `WorldClock-floating.ps1` – older always-on-top floating strip version
+- `memory.md`, `BUG_LOG.md`, `DECISIONS_LOG.md` – project notes: how it works, bugs fixed, and why things are the way they are
